@@ -1,3 +1,5 @@
-upload temp folder,
-smarty template compiled folder,
+smarty template compiled folder.
 etc.
+
+todo:
+chmod 0777 tmp/
