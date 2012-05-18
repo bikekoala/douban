@@ -2,7 +2,7 @@
 /**
  *  常规 
  */
-$conf['include_path'] = SYS_PATH . '/src/library:' . SYS_PATH . '/src/thirdparty:'
+$conf['include_path'] = SYS_PATH . '/src/library:' . SYS_PATH . '/src/thirdparty:';
 $conf['environment'] = 'production';
 $conf['debug'] = true;
 
@@ -49,7 +49,7 @@ $conf['tpl']['left_delimiter'] = '<{';
 // 右限定
 $conf['tpl']['right_delimiter'] = '}>';
 // 模板存放路径
-$conf['tpl']['template_dir'] = SYS_PATH . '/template';
+$conf['tpl']['template_dir'] = SYS_PATH . '/src/template';
 // 编译目录
 // 注意：不同的应用应该使用不同的编译目录，否则会出现冲突
 $conf['tpl']['compile_dir'] = TEMP_PATH; 
