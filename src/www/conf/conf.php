@@ -3,7 +3,8 @@
  *  常规 
  */
 $conf['include_path'] = SYS_PATH . '/src/library:' . SYS_PATH . '/src/thirdparty:'
-$conf['debug'] = isset($_GET['debug']);
+$conf['environment'] = 'production';
+$conf['debug'] = true;
 
 /**
  * 错误记录
