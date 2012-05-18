@@ -17,21 +17,21 @@ $conf['notice_log']['level'] = 7;
 /**
  *  控制器配置
  */
-//程序执行流
+// 程序执行流
 $conf['ctrl_front']['phase']['flow'] = array('INPUT', 'ADAPTER', 'DISPATCH', 'OUTPUT');
-//是否自动捕获action执行的异常
+// 是否自动捕获action执行的异常
 $conf['ctrl_front']['phase']['dispatch']['catch_error'] = true;
-//应用的请求空间
+// 应用的请求空间
 $conf['ctrl_front']['phase']['adapter']['prefix'] = 'Douban_Action_';
-//应用的请求默认Action
+// 应用的请求默认Action
 $conf['ctrl_front']['phase']['adapter']['default'] = 'Main';
-//默认的请求类型
+// 默认的请求类型
 $conf['ctrl_front']['phase']['adapter']['agent']['default'] = 'html';
-//允许指定输出格式
+// 允许指定输出格式
 $conf['ctrl_front']['phase']['output']['allow_format'] = true;
-//默认输出类型
+// 默认输出类型
 $conf['ctrl_front']['phase']['output']['format']['default'] = 'html';
-//默认输出类型
+// 默认输出类型
 $conf['ctrl_front']['phase']['output']['format']['cli'] = 'text';
 
 
