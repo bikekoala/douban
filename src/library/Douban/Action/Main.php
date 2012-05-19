@@ -1,7 +1,7 @@
 <?PHP
-class Douban_Action_Main extends Su_Ctrl_Action
+class Douban_Action_Main extends Douban_Action_Abstract
 {
-	public function execute()
+	public function run()
 	{
 		$this->tpl('index');
 	}
