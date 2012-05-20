@@ -4,8 +4,11 @@ class Douban_Config extends Su_Config
 	protected function __construct()
 	{   
 		/**
-		 *  配置信息开始       
+		 *  douban auth info
 		 */
+		$conf['auth']['api'] = 'http://www.douban.com/j/app/login';
+		$conf['auth']['app'] = 'radio_android';
+		$conf['auth']['ver'] = '590';
 
 		$this->data = $conf;   
 	}

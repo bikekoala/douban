@@ -2,11 +2,11 @@
 abstract class Douban_Action_Abstract extends Su_Ctrl_Action
 {
 	protected $_needAuth = true;
-	protected $_isAuth;
+	protected $_auth;
 
 	public function execute()
 	{
-		$this->_isAuth = $this->_needAuth ? $this->service('Auth_Check') : true;
+		$this->_auth = $this->service('Auth_Check');
 		$this->run();
 	}
 
@@ -16,5 +16,13 @@ abstract class Douban_Action_Abstract extends Su_Ctrl_Action
 	{
 		$class = 'Douban_Service_' . $serviceName;
 		return $class::getInstance()->run($params);
+	}
+
+	public function getAuthMessage($isAuth = null)
+	{
+		$isAuth = $this->_auth['is_auth'] || $isAuth;
+		$data['is_auth'] = $isAuth;
+		$data['message'] = $isAuth ? 'ok.' : 'Invalid auth.';
+		return $data;
 	}
 }
