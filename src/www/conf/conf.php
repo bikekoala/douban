@@ -38,7 +38,7 @@ $conf['ctrl_front']['phase']['output']['format']['cli'] = 'text';
 /**
  * 异常信息控制
  */
-$conf['fault']['class'] = 'Su_Action_Fault';
+$conf['fault']['class'] = 'Douban_Action_Fault';
 $conf['fault']['tpl'] = 'fault';
 
 /**
