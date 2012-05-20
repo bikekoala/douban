@@ -2,15 +2,10 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>hi,guys</title>          
+<title>oops!</title>          
 </head>
 <body>
-<{if $isAuth == false}>
-<form action="?do=Auth.Logon" method="post">
-<p>username: <input type="text" name="username"/></p>
-<p>password: <input type="password" name="password"/></p>
-<input type="submit" value="Submit" />
-</form>
-<{/if}>
+code: <{$code}><br />      
+msg : <{$message}><br />   
 </body>
 </html>
