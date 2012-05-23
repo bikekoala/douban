@@ -1,17 +1,17 @@
 <?PHP
 class Douban_Action_Auth_Logon extends Douban_Action_Abstract
 {
-	protected $_needAuth = false;
+	protected $needAuth = false;
 
 	public function run()
 	{
-		$params = $this->_filter();
-		$params && $isAuth = $this->service('Auth_Logon', $params);
-		$this->response($this->getAuthMessage($isAuth));
+		$request = $this->filter();
+		$request && $isAuth = $this->service('Auth_Logon', $request);
+		$this->setResponse(array('is_auth' => $isAuth));
 		$this->format(Su_Const::FT_JSON);
 	}
 	
-	private function _filter()
+	private function filter()
 	{
 		$username = $this->request->filter('username', FILTER_SANITIZE_STRING, null, INPUT_POST);
 		$password = $this->request->filter('password', FILTER_SANITIZE_STRING, null, INPUT_POST);

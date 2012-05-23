@@ -3,16 +3,11 @@ class Douban_Service_Auth_Logon extends Douban_Service_Auth_Abstract
 {
 	public function run($params)
 	{
-		$auth = $this->_doAuth($params);
-		if ($auth) {
-			$this->_cookie($auth);
-			return true;
-		} else {
-			return false;
-		}
+		$auth = $this->doAuth($params) && $this->cookie($auth);
+		return $auth;
 	}
 
-	private function _doAuth($params)
+	private function doAuth($params)
 	{
 		$conf = Douban_Config::single();
 		$post['email'] = $params['username'];
@@ -24,7 +19,7 @@ class Douban_Service_Auth_Logon extends Douban_Service_Auth_Abstract
 		return $data['r'] == 0 ? $data : false;
 	}
 
-	private function _cookie($data)
+	private function cookie($data)
 	{
 		$auth[] = $data['user_id'];
 		$auth[] = $data['user_name'];

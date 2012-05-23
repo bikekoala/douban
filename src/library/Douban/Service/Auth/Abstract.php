@@ -1,6 +1,9 @@
 <?PHP
 abstract class Douban_Service_Auth_Abstract extends Douban_Service_Abstract
 {
+	/**
+	 * the key of cookie
+	 */
 	const COOKIE_KEY = 'suauth';
 	/**
 	 * 验证auth信息完整性的字符串 

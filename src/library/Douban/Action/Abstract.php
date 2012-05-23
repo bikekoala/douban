@@ -1,12 +1,12 @@
 <?PHP
 abstract class Douban_Action_Abstract extends Su_Ctrl_Action
 {
-	protected $_needAuth = true;
-	protected $_auth;
+	protected $needAuth = true;
+	protected $auth;
 
 	public function execute()
 	{
-		$this->_auth = $this->service('Auth_Check');
+		$this->auth = $this->service('Auth_Check');
 		$this->run();
 	}
 
@@ -18,11 +18,20 @@ abstract class Douban_Action_Abstract extends Su_Ctrl_Action
 		return $class::getInstance()->run($params);
 	}
 
-	public function getAuthMessage($isAuth = null)
+	public function setResponse(array $params = array())
 	{
-		$isAuth = $this->_auth['is_auth'] || $isAuth;
-		$data['is_auth'] = $isAuth;
-		$data['message'] = $isAuth ? 'ok.' : 'Invalid auth.';
-		return $data;
+		if ( ! $this->needAuth && ! isset($params['is_auth'])) {
+			$response['stat'] = null;
+			$response['data'] = $params;
+			$response['message'] = null;
+		} else {
+			$defaultAuth = $this->needAuth ? $this->auth['is_auth'] : null;
+			$customAuth = isset($params['is_auth']) ? $params['is_auth'] : null;
+			$isAuth = $defaultAuth || $customAuth;
+			$response['stat'] = $isAuth;
+			$response['data'] = isset($params['data']) ? $params['data'] : array();
+			$response['message'] = $isAuth ? (isset($params['message']) ? $params['message'] : 'ok.') : 'Invalid auth.';
+		}
+		$this->response($response);
 	}
 }

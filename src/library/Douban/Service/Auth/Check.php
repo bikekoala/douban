@@ -5,7 +5,7 @@ class Douban_Service_Auth_Check extends Douban_Service_Auth_Abstract
 	{
 		$cookie = $_COOKIE[self::COOKIE_KEY];
 		$stat['is_auth'] = isset($cookie);
-		$stat['info'] = isset($cookie) ? $this->unserializeAuth($cookie) : array();
+		$stat['data'] = isset($cookie) ? $this->unserializeAuth($cookie) : array();
 		return $stat;
 	}
 }
