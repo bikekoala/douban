@@ -20,17 +20,17 @@ abstract class Douban_Action_Abstract extends Su_Ctrl_Action
 
 	public function setResponse(array $params = array())
 	{
-		if ( ! $this->needAuth && ! isset($params['is_auth'])) {
-			$response['stat'] = null;
-			$response['data'] = $params;
-			$response['message'] = null;
+		if ( ! $this->needAuth && ! isset($params['auth'])) {
+			$content['auth'] = null;
+			$content['data'] = $params;
+			$content['error'] = null;
 		} else {
-			$defaultAuth = $this->needAuth ? $this->auth['is_auth'] : null;
-			$customAuth = isset($params['is_auth']) ? $params['is_auth'] : null;
+			$defaultAuth = $this->needAuth ? $this->auth['auth'] : null;
+			$customAuth = isset($params['auth']) ? $params['auth'] : null;
 			$isAuth = $defaultAuth || $customAuth;
-			$response['stat'] = $isAuth;
-			$response['data'] = isset($params['data']) ? $params['data'] : array();
-			$response['message'] = $isAuth ? (isset($params['message']) ? $params['message'] : 'ok.') : 'Invalid auth.';
+			$content['auth'] = $isAuth;
+			$content['data'] = isset($params['data']) ? $params['data'] : array();
+			$content['error'] = $isAuth ? (isset($params['error']) ? $params['error'] : 'ok.') : 'Invalid auth.';
 		}
 		$this->response($response);
 	}

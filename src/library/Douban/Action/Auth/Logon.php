@@ -7,7 +7,7 @@ class Douban_Action_Auth_Logon extends Douban_Action_Abstract
 	{
 		$request = $this->filter();
 		$request && $isAuth = $this->service('Auth_Logon', $request);
-		$this->setResponse(array('is_auth' => $isAuth));
+		$this->setResponse(array('auth' => $isAuth));
 		$this->format(Su_Const::FT_JSON);
 	}
 	
