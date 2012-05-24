@@ -10,6 +10,11 @@ class Douban_Config extends Su_Config
 		$conf['auth']['app'] = 'radio_android';
 		$conf['auth']['ver'] = '590';
 
+		/**
+		 * music list
+		 */
+		$conf['list']['liked'] = 'http://www.douban.com/j/app/radio/liked_songs';
+
 		$this->data = $conf;   
 	}
 

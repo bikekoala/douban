@@ -1,6 +1,11 @@
 <?PHP
 class Douban_Service_Abstract
 {
+	/*
+	 * global auth info
+	 */
+	static $auth;
+
 	public static function getInstance()
 	{
 		static $instance;
