@@ -6,6 +6,7 @@ abstract class Douban_Action_Abstract extends Su_Ctrl_Action
 
 	public function execute()
 	{
+		$this->format(Su_Const::FT_JSON);
 		$this->auth = $this->service('Auth_Check');
 		$this->run();
 	}

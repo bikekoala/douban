@@ -13,7 +13,6 @@ class Douban_Action_Auth_Logon extends Douban_Action_Abstract
 			$isAuth = $auth['auth'];
 		}
 		$this->setResponse(array('auth' => $isAuth));
-		$this->format(Su_Const::FT_JSON);
 	}
 	
 	private function filter()
