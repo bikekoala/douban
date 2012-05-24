@@ -3,7 +3,7 @@ class Douban_Service_Auth_Logon extends Douban_Service_Auth_Abstract
 {
 	public function run($params)
 	{
-		$auth = $this->doAuth($params) && $this->cookie($auth);
+		($auth = $this->doAuth($params)) && $this->cookie($auth);
 		return $auth;
 	}
 
@@ -15,8 +15,8 @@ class Douban_Service_Auth_Logon extends Douban_Service_Auth_Abstract
 		$post['app_name'] = $conf['auth']['app'];
 		$post['version'] = $conf['auth']['ver'];
 		$curl = new Su_Curl($conf['auth']['api']);
-		$data = json_decode($curl->post($post), true);
-		return $data['r'] == 0 ? $data : false;
+		$data = $curl->rest($post);
+		return $data['r'] === 0 ? $data : false;
 	}
 
 	private function cookie($data)

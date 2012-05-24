@@ -6,7 +6,12 @@ class Douban_Action_Auth_Logon extends Douban_Action_Abstract
 	public function run()
 	{
 		$request = $this->filter();
-		$request && $isAuth = $this->service('Auth_Logon', $request);
+		if ($request) {
+			$isAuth = $this->service('Auth_Logon', $request);
+		} else {
+			$auth = $this->service('Auth_Check');
+			$isAuth = $auth['auth'];
+		}
 		$this->setResponse(array('auth' => $isAuth));
 		$this->format(Su_Const::FT_JSON);
 	}

@@ -32,6 +32,6 @@ abstract class Douban_Action_Abstract extends Su_Ctrl_Action
 			$content['data'] = isset($params['data']) ? $params['data'] : array();
 			$content['error'] = $isAuth ? (isset($params['error']) ? $params['error'] : 'ok.') : 'Invalid auth.';
 		}
-		$this->response($response);
+		$this->response($content);
 	}
 }
