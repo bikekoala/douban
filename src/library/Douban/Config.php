@@ -14,6 +14,7 @@ class Douban_Config extends Su_Config
 		 * music list
 		 */
 		$conf['list']['liked'] = 'http://www.douban.com/j/app/radio/liked_songs';
+		$conf['list']['max'] = 5000;
 
 		$this->data = $conf;   
 	}

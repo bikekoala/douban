@@ -1,10 +1,10 @@
 <?PHP
-class Douban_Action_List_Get_Liked extends Douban_Action_Abstract
+class Douban_Action_List_Liked extends Douban_Action_Abstract
 {
 	public function run()
 	{
 		$request = $this->filter();
-		$list = $this->service('List_Get_Liked', $request);
+		$list = $this->service('List_Liked', $request);
 		$this->setResponse(array('data' => $list));
 	}
 	
