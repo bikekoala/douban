@@ -8,6 +8,7 @@ class Douban_Service_List_Liked extends Douban_Service_Auth_Abstract
 
 		// read from db
 		$list = $this->getList($start, $limit);
+		exit;
 		if (count($list) < $limit) {
 			$list = $this->syncList($start, $limit);
 		}

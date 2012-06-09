@@ -16,6 +16,11 @@ class Douban_Config extends Su_Config
 		$conf['list']['liked'] = 'http://www.douban.com/j/app/radio/liked_songs';
 		$conf['list']['max'] = 5000;
 
+		/**
+		 * mysql
+		 */
+		$conf['pdo'] = 'mysql://root@10.0.0.24:3306?dbname=douban';
+
 		$this->data = $conf;   
 	}
 
