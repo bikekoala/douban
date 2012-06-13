@@ -3,9 +3,12 @@ class Douban_Entity_Songs extends Douban_Entity_Abstract
 {
 	protected $table = 'songs';
 
-	protected function getList($uid)
+	public function getList($uid, $start, $limit)
 	{
 		$sql = "SELECT * FROM {$this->table} WHERE `uid` = {$uid}";
+		if (isset($start) && isset($limit)) {
+			$sql .= " LIMIT {$start},{$limit}";
+		}
 		$sth = $this->pdo->prepare($sql);
 		$sth->setFetchMode(PDO::FETCH_ASSOC); 
 		try {
@@ -16,7 +19,7 @@ class Douban_Entity_Songs extends Douban_Entity_Abstract
 		}
 	}
 
-	protected function getCount($uid)
+	public function getCount($uid)
 	{
 		$sql = "SELECT COUNT(*) FROM {$this->table} WHERE `uid` = {$uid}";
 		try {
@@ -26,7 +29,7 @@ class Douban_Entity_Songs extends Douban_Entity_Abstract
 		}
 	}
 
-	protected function insert($uid, $list)
+	public function insert($uid, $list)
 	{
 		// prepare
 		$mtime = date('Y-m-d H:i:s');
@@ -49,18 +52,24 @@ class Douban_Entity_Songs extends Douban_Entity_Abstract
 		$fields['picture'] = 'picture';
 		$fields['url'] = 'url';
 		$fields['mtime'] = 'mtime';
-		// gen sql
-		$sql = sprintf("INSERT INTO `%s`(%s) VALUE ", $table, implode(',', array_keys($fields)));
+		// prepare
+		$sql = sprintf("INSERT INTO `%s`(%s) VALUE ", $this->table, implode(',', array_keys($fields)));
 		foreach ($params as $song) {
 			$str = '';
 			foreach ($fields as $field) {
-				$str .= sprintf("'%s'," $song[$field]);
+				$str .= sprintf(":%s_%s,", $song['sid'], $field);
 			}
 			$sql .= sprintf("(%s),", substr($str, 0, -1));
 		}
 		$sql = substr($sql, 0, -1);
-		// batch insert
 		$sth = $this->pdo->prepare($sql);
+		// bindvalue
+		foreach ($params as $song) {
+			foreach ($fields as $field) {
+				$sth->bindValue(sprintf(":%s_%s", $song['sid'], $field), $song[$field]);	
+			}
+		}
+		// batch insert
 		try {
 			return $sth->execute();
 		} catch (PDOException $e) {
@@ -68,15 +77,14 @@ class Douban_Entity_Songs extends Douban_Entity_Abstract
 		}
 	}
 	
-	protected  function del($uid, $sid = null)
+	public function del($uid, $sid = null)
 	{
 		$sql = "DELETE FROM {$this->table} WHERE `uid` = {$uid}";
 		if ($sid) {
 			$sql .= sprintf(" AND `sid` IN (%s)", implode(',', $sid));
 		}
-		$sth = $this->pdo->prepare($sql);
 		try {
-			return $sth->execute();
+			return $this->pdo->query($sql);
 		} catch (PDOException $e) {
 			throw new Exception($e->getMessage(), 500);
 		}
