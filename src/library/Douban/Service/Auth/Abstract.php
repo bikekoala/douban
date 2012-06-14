@@ -20,7 +20,7 @@ abstract class Douban_Service_Auth_Abstract extends Douban_Service_Abstract
 		$auth = Su_Func::encrypt($auth, self::ENCRYPT_KEY, 'DECODE');
 		$tmps = explode('|', $auth);
 		if (count($tmps) != 7)  {
-			throw new Su_Exc('Invalid suauth.', 400);
+			throw new Exception('Invalid suauth.', 400);
 		}
 		$arr['user_id'] = $tmps[0];
 		$arr['user_name'] = $tmps[1];
@@ -29,7 +29,7 @@ abstract class Douban_Service_Auth_Abstract extends Douban_Service_Abstract
 		$arr['ip'] = $tmps[4];
 		$arr['timestamp'] = $tmps[5];
 		if (crc32(implode('|', $arr) . self::SERIAL_SECRET) != $tmps[6]) {
-			throw new Su_Exc('Auth validate fail.', 400);
+			throw new Exception('Auth validate fail.', 400);
 		}
 		return $arr;
 	}
