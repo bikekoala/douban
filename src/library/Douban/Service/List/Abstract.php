@@ -1,5 +1,5 @@
 <?PHP
-class Douban_Service_List_Liked extends Douban_Service_Abstract
+class Douban_Service_List_Abstract extends Douban_Service_Abstract
 {
 	public function getOnlineList()
 	{
@@ -16,17 +16,17 @@ class Douban_Service_List_Liked extends Douban_Service_Abstract
 		return $data['r'] === 0 ? $data['songs'] : array();
 	}
 
-	public function getStoreList($start = null, $limit = null)
+	public function getLocalList($start = null, $limit = null)
 	{
 		$uid = static::$auth['user_id'];
 		return Douban_Entity_Songs::single()->getList($uid, $start, $limit);
 	}
 
-	public function sync($storeList, $onlineList)
+	public function sync($localList, $onlineList)
 	{
-		$storeSid = array();
-		foreach ($storeList as $val) {
-			$storeSid[] = $val['sid'];
+		$localSid = array();
+		foreach ($localList as $val) {
+			$localSid[] = $val['sid'];
 		}
 		$onlineSid = array();
 		foreach ($onlineList as $val) {
@@ -34,10 +34,10 @@ class Douban_Service_List_Liked extends Douban_Service_Abstract
 		}
 
 		// add like songs
-		$addList = array_diff($onlineSid, $storeSid);
+		$addList = array_diff($onlineSid, $localSid);
 		$newList = $this->add($addList, $onlineList);
 		// del unlike songs
-		$delList = array_diff($storeSid, $onlineSid);
+		$delList = array_diff($localSid, $onlineSid);
 		$this->del($delList);	
 
 		return $newList;

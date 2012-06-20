@@ -19,6 +19,19 @@ class Douban_Entity_Songs extends Douban_Entity_Abstract
 		}
 	}
 
+	public function search($uid, $query)
+	{
+		$sql = "SELECT * FROM {$this->table} WHERE CONCAT(`title`, `artist`, `albumtitle`) LIKE '%{$query}%' AND `uid` = {$uid}";
+		$sth = $this->pdo->prepare($sql);
+		$sth->setFetchMode(PDO::FETCH_ASSOC); 
+		try {
+			$sth->execute();
+			return $sth->fetchAll();
+		} catch (PDOException $e) {
+			throw new Exception($e->getMessage(), 500);
+		}
+	}
+
 	public function getCount($uid)
 	{
 		$sql = "SELECT COUNT(*) FROM {$this->table} WHERE `uid` = {$uid}";

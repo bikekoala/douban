@@ -1,5 +1,5 @@
 <?PHP
-class Douban_Service_Abstract
+abstract class Douban_Service_Abstract
 {
 	/*
 	 * global auth info

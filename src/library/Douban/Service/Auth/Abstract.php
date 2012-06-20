@@ -1,5 +1,5 @@
 <?PHP
-abstract class Douban_Service_Auth_Abstract extends Douban_Service_Abstract
+class Douban_Service_Auth_Abstract extends Douban_Service_Abstract
 {
 	/**
 	 * the key of cookie
