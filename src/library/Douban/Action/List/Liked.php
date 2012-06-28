@@ -13,8 +13,10 @@ class Douban_Action_List_Liked extends Douban_Action_Abstract
 	
 	private function filter()
 	{
-		$start = is_numeric($this->request['start']) ? (int) $this->request['start'] : $this->start;
-		$limit = is_numeric($this->request['limit']) ? (int)$this->request['limit'] : $this->limit;
+		$start = (int) $this->request['start'];
+		$limit = (int) $this->request['limit'];
+		$start = $start > 0 ? $start : $this->start;
+		$limit = $limit > 0 ? $limit : $this->limit;
 		return compact('start', 'limit');
 	}
 }
