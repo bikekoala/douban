@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="description" content="红心MHz — Listen to your voice">
+<meta name="viewport" content="user-scalable=no, width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<title>红心MHz — Listen to your voice</title>
+<link rel="shortcut icon" href="http://douban.fm/favicon.ico" type="image/x-icon">
+<link rel="stylesheet" href="static/css/logon.css">
+<script src="static/js/jquery-1.7.2.min.js"></script>
+<script src="static/js/jquery.placeholder.js"></script>
+</head>
+<body>
+
+<div id="login">
+<h1>红心MHz</h1>
+<div id="notice" class="failure-hide">
+<ul>
+<li><i></i><span></span></li>
+</ul>
+</div>
+<form class="login" action="#" method="post" id="loginForm">
+<div><input class="text" type="email" name="email" spellcheck="false" placeholder="邮 箱" autofocus="" tabindex="1"></div>
+<div><input class="text" type="password" name="password" placeholder="密 码" tabindex="2"></div>
+<input class="button" type="submit" value="登 录" tabindex="3">
+<div class="clearfix"></div>
+</form>
+</div>
+<script>
+// check form
+$(function() {
+	var $form = $('#loginForm')
+	var support = (function(input) {
+			return function(attr) { return attr in input }
+		})(document.createElement('input'))
+	if ( !(support('placeholder') && $.browser.webkit) ) {
+		$('.text', $form).placeholder({
+			useNative: false,
+			hideOnFocus: false,
+			style: {
+				textShadow: 'none'
+			}
+		})
+	}
+	if ( !support('autofocus') ) {
+		$('input[autofocus]', $form).focus()
+	}
+})
+// login
+$(function() {
+	$(".button").click(function() {
+		var $email = $("input[name=email]").val()
+		var $password = $("input[name=password]").val()
+		if ($email != "" && $password != "") {
+			$.post("?do=Auth.Logon", {username:$email, password:$password}, function(result) {
+				if (result.auth) {
+					window.location.reload()
+				} else {
+					notice("邮箱和密码不匹配")
+				}
+			}, "json")
+		} else {
+			notice("不能空着")
+		}
+		return false
+	})
+})
+// notice
+function notice(msg) {
+	$("#notice li span").text(msg)
+	$("#notice").removeClass("failure-hide").addClass("failure")
+}
+</script>
+
+</body>
+</html>
