@@ -1,0 +1,132 @@
+#player-con {
+	width: 510px;
+	height: 245px;
+	background-color: #ffffff;
+	font-family: "Microsoft Yahei", "微软雅黑", Tahoma, Arial, Helvetica, STHeiti;
+	border: 1px solid #8ecbb9;
+}
+#fm-picture {
+	width: 245px;
+	height: 245px;
+	float: left;
+}
+#fm-picture img {
+	width: 100%;
+	height: 100%;
+}
+#fm-control {
+	width: 265px;
+	height: 245px;
+	margin-left:245px;
+}
+#fm-pause {
+	width: 100%;
+	height: 28px;
+}
+#fm-pause img {
+	width: 28px;
+	height: 100%;
+	margin-right: 12px;
+	float: right;
+}
+#fm-main {
+	height: 190px;
+	padding-left: 22px;
+	padding-right: 22px;
+}
+#fm-info {
+	height: 85px;
+	padding-left: 2px;
+}
+#fm-info span {
+	overflow: hidden;
+	white-space: nowrap;
+	-o-text-overflow: ellipsis;
+	text-overflow: ellipsis;
+}
+#fm-info span[title=artist] {
+	display: block;
+	color: #333333;
+	font-size: 23px;
+	font-weight: 300;
+	letter-spacing: 2px
+}
+#fm-info-ap {
+	line-height: 15px;
+	margin-top: 2px;
+}
+#fm-info-a {
+	margin-top: 2px;
+	padding-right: 5px;
+	color: #323232;
+	font-size: 12px;
+}
+#fm-info-a i {
+	display:block;
+	float: left;
+	font-style: normal;
+}
+#fm-info-a i:nth-of-type(1) {
+	padding-right: 5px;
+}
+#fm-info-a i:nth-of-type(2) {
+	padding-left: 5px;
+	padding-right: 5px;
+}
+#fm-info-a span[title=albumtitle] {
+	display:block;
+	float: left;
+	max-width: 120px;
+}
+#fm-info-ap span[title=publictime] {
+	display:block;
+	color: #575757;
+	font-size: 12px;
+}
+#fm-info span[title=title] {
+	display:block;
+	margin-top: 18px;
+	color: #1d9c6e;
+	font-size: 14px;
+	font: 12px/1.6 arial,helvetica,sans-serif;
+	letter-spacing: 1px
+}
+
+#fm-progress {
+	margin-top: 4px;
+	border: 1px solid #e5e5e8;
+/*
+	border: 1px solid #8ecbb9;
+*/
+}
+#fm-status {
+	height: 17px;
+	margin-top: 2px;
+}
+#fm-status span {
+	display: block;
+	float: right;
+	margin-right: 13px;
+	font-size: 12px;
+	color: #939892;
+}
+#fm-status img {
+	float: right;
+	margin-top: 4px;
+	width: 10px;
+	height: 10px;
+}
+#fm-blank {
+	height: 55px;
+}
+#fm-opera {
+	height: 25px;
+}
+#fm-opera img:nth-of-type(1) {
+	margin-top: 4px;
+	float: right;
+}
+#fm-opera img:nth-of-type(2) {
+	margin-right: 30px;
+	float: right;
+}

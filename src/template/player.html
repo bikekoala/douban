@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="description" content="Sunshine Girl">
+<meta name="viewport" content="user-scalable=no, width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<title>Sunshine Girl</title>
+<link rel="shortcut icon" href="http://douban.fm/favicon.ico" type="image/x-icon">
+<link rel="stylesheet" href="static/css/player_jplayer.css">
+<script src="static/js/jquery-1.7.2.min.js"></script>
+<script src="static/js/jplayer/jquery.jplayer-2.1.0-min.js"></script>
+</head>
+<body>
+
+<div id="player"></div>
+<div id="player-con">
+	<div class="jp-progress">
+		<div class="jp-seek-bar">
+			<div class="jp-play-bar"></div>
+		</div>
+	</div>
+	<div id="song-name">Sunshine Girl</div>
+	<a href="javascript:void(0)" id="play" class="trangle-border"></a>
+</div>
+
+<script type="text/javascript">
+	$(function() {
+		$("#player").jPlayer({
+			ready: function () {
+				$("#player-con").css("display","block");
+				$(this).jPlayer("setMedia", {
+					mp3: "static/sunshine_girl.mp3"
+				});
+			},
+			ended:function(){
+				$("#play").click();
+			},
+			swfPath:"static/js/jplayer/js",
+			errorAlerts: true,
+			cssSelectorAncestor: '#player-con',
+			cssSelector: {
+				seekBar: '.jp-seek-bar',
+				playBar: '.jp-play-bar',
+				currentTime: '.jp-current-time',
+				duration: '.jp-duration',
+				mute: '.jp-mute',
+				unmute: '.jp-unmute',
+				volumeBar: '.jp-volume-bar',
+				volumeBarValue: '.jp-volume-bar-value',
+				volumeMax: '.jp-volume-max'
+			}
+		});
+		var playClicked=false;
+		$("#play").click(function(){
+			playClicked=!playClicked;
+			if(playClicked){
+				$(this).removeClass("trangle-border").text("▌▌");
+				$("#player").jPlayer("play");
+			}else{
+				$(this).text("").addClass("trangle-border");
+				$("#player").jPlayer("pause");
+			}
+		});
+		$("#pause").click(function(){
+			$("#player").jPlayer("pause");
+		});
+		$("#stop").click(function(){
+			$("#player").jPlayer("stop");
+		});
+	});
+</script>
+</body>
+</html>
