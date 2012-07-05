@@ -9,6 +9,7 @@
 <title>Player</title>
 <link rel="shortcut icon" href="http://douban.fm/favicon.ico" type="image/x-icon">
 <link rel="stylesheet" href="static/css/player_fm.css">
+<script src="static/js/jquery-1.7.2.min.js"></script>
 </head>
 <body>
 
@@ -16,19 +17,22 @@
 	<!-- picture -->
 	<div id="fm-picture">
 		<img src="static/img/player_fm_miao.jpg" alt="picture"/>
+		<a href="http://www.baidu.com" target="_blank"></a>
 	</div>
 
 	<!-- control -->
 	<div id="fm-control">
 		<!-- pause -->
 		<div id="fm-pause">
-			<img src="static/img/player_fm_pause.bmp" alt="pause"/>
+			<img src="static/img/player_fm_pause.png" alt="pause"/>
+			<div id="fm-pause-hover"></div>
 		</div>
 
 		<!-- main -->
 		<div id="fm-main">
 			<!-- info -->
 			<div id="fm-info">
+				<div id="fm-info-mask"></div>
 				<span title="artist">范玮琪</span>
 				<div id="fm-info-ap">
 					<div id="fm-info-a">
@@ -41,24 +45,62 @@
 				<span title="title">最初的梦想</span>
 			</div>
 
-			<!-- progress -->
+			<!-- progress-bar -->
 			<div id="fm-progress"></div>
 
+			<!-- status -->
 			<div id="fm-status">
-				<!-- volume -->
+				<div id="fm-status-volumn"></div>
+				<div id="fm-status-mask"></div>
 				<img src="static/img/player_fm_volumn.png" alt="volume"/>
-				<!-- time -->
-				<span>-0:30</span>
+				<span>-00:30</span>
 			</div>
-			<div id="fm-blank"></div>
-
 			<div id="fm-opera">
-				<img src="static/img/player_fm_next.bmp"/>
-				<img src="static/img/player_fm_like.png"/>
+				<img src="static/img/player_fm_next_normal.png" alt="next"/>
+				<img src="static/img/player_fm_like_normal.png" alt="like"/>
 			</div>
 		</div>
 	</div>
 </div>
 
+<script type="text/javascript">
+	/**
+	 * UI
+	 */
+	$(function() {
+		// picture
+		$("#fm-picture").hover(function () {
+			$("#fm-picture a").stop().show().fadeTo(220, 0.7)
+	    }, function () {
+			$("#fm-picture a").stop().fadeTo(200, 0)
+		})
+		// button volumn
+		$("#fm-status-mask").hover(function() {
+			$("#fm-status span").stop().hide(0, function () {
+				$("#fm-status img").stop().animate({marginRight:"55px"}, 150, "linear", function() {
+					$("#fm-status-volumn").stop().show()
+				})
+			})
+		}, function() {
+			$("#fm-status-volumn").stop().hide(0, function() {
+				$("#fm-status img").stop().animate({marginRight:"0px"}, "fast", "linear", function() {
+					$("#fm-status span").stop().show()
+				})
+			})
+		})
+		// button next
+		$("#fm-opera img[alt=next]").hover(function() {
+			$(this).attr("src", "static/img/player_fm_next_hover.png")
+		}, function() {
+			$(this).attr("src", "static/img/player_fm_next_normal.png")
+		})
+		// button like
+		$("#fm-opera img[alt=like]").hover(function() {
+			$(this).attr("src", "static/img/player_fm_like_hover.png")
+		}, function() {
+			$(this).attr("src", "static/img/player_fm_like_normal.png")
+		})
+	})
+</script>
 </body>
 </html>

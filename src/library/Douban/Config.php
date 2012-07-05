@@ -19,7 +19,7 @@ class Douban_Config extends Su_Config
 		/**
 		 * mysql
 		 */
-		$conf['pdo'] = 'mysql://root@10.0.0.24:3306?dbname=douban';
+		$conf['pdo'] = 'mysql://root@10.0.0.24:3306?dbname=sxw';
 
 		$this->data = $conf;   
 	}
