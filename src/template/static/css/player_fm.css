@@ -25,9 +25,33 @@
 	display: none;
 }
 #fm-control {
+	position: relative;
 	width: 265px;
 	height: 245px;
 	margin-left:245px;
+}
+#fm-play {
+	position: absolute;
+	top: 0px;
+	right: 0px;
+	width: 265px;
+	height: 245px;
+	background-color: rgba(255, 255, 255, 0.8);
+	z-index: 10;
+	display: none;
+}
+#fm-play-fontmask {
+	position: absolute;
+	top: 110px;
+	left: 100px;
+	width: 65px;
+	height: 20px;
+}
+#fm-play span {
+	display: block;
+	width: 65px;
+	margin: 110px 0px 0px 100px;
+	font: 13px/1.6 arial,helvetica,sans-serif;
 }
 #fm-pause {
 	position: relative;
@@ -117,18 +141,29 @@
 	display:block;
 	margin-top: 18px;
 	color: #1d9c6e;
-	font-size: 14px;
 	font: 12px/1.6 arial,helvetica,sans-serif;
 	letter-spacing: 1px
 }
-
 #fm-progress {
+	position: relative;
 	margin-top: 4px;
+}
+#fm-progress-default {
+	border: 1px solid #e5e5e8;
+}
+#fm-progress-seekbar {
+	position: absolute;
+	top: 0px;
+	left: 0px;
 	border: 1px solid #e5e5e8;
 	cursor: pointer;
-/*
+}
+#fm-progress-playbar {
+	position: absolute;
+	top: 0px;
+	left: 0px;
 	border: 1px solid #8ecbb9;
-*/
+	cursor: pointer;
 }
 #fm-status {
 	position: relative;
@@ -143,14 +178,35 @@
 	height: 100%;
 	cursor: pointer;
 }
-#fm-status-volumn {
+#fm-status-volume {
 	position: absolute;
 	top: 7px;
-	right: 0px;
+	right: 5px;
 	width: 50px;
-	border: 2px solid #e5e5e8;
-	cursor: pointer;
+	z-index: 1;
 	display: none;
+}
+#fm-status-volume-position {
+	width: 50px;
+	position: relative;
+}
+#fm-status-volume-default {
+	width: 100%;
+	border: 2px solid #e5e5e8;
+}
+#fm-status-volume-value {
+	position: absolute;
+	top: 0px;
+	left: 0px;
+	border: 2px solid #323232;
+}
+#fm-status-volume-bar {
+	position: absolute;
+	top: 0px;
+	left: 0px;
+	width: 100%;
+	border: 2px solid rgba(255, 255, 255, 0);
+	cursor: pointer;
 }
 #fm-status span {
 	display: block;
