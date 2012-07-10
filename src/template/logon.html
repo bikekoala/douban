@@ -70,7 +70,7 @@ $(function() {
 // notice
 function notice(msg) {
 	$("#notice li span").text(msg)
-	$("#notice").removeClass("failure-hide").addClass("failure")
+	$("#notice").attr("class", "failure");
 }
 </script>
 

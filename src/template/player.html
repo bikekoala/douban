@@ -8,67 +8,147 @@
 <meta name="viewport" content="user-scalable=no, width=device-width, initial-scale=1.0, maximum-scale=1.0">
 <title>Sunshine Girl</title>
 <link rel="shortcut icon" href="http://douban.fm/favicon.ico" type="image/x-icon">
-<link rel="stylesheet" href="static/css/player_jplayer.css">
+<link rel="stylesheet" href="static/css/player_fm.css">
 <script src="static/js/jquery-1.7.2.min.js"></script>
 <script src="static/js/jplayer/jquery.jplayer-2.1.0-min.js"></script>
 </head>
 <body>
-
 <div id="player"></div>
 <div id="player-con">
-	<div class="jp-progress">
-		<div class="jp-seek-bar">
-			<div class="jp-play-bar"></div>
+	<!-- picture -->
+	<div id="fm-picture">
+		<img src="static/img/player_fm_sunshinegirl.jpg" alt="picture"/>
+		<a href="http://www.baidu.com" target="_blank"></a>
+	</div>
+	<!-- control -->
+	<div id="fm-control">
+		<!-- play -->
+		<div id="fm-play">
+			<div id="fm-play-fontmask"></div>
+			<span>继续收听 &gt</span>
+		</div>
+		<!-- pause -->
+		<div id="fm-pause">
+			<img src="static/img/player_fm_pause.png" alt="pause"/>
+			<div id="fm-pause-hover"></div>
+		</div>
+		<!-- main -->
+		<div id="fm-main">
+			<!-- info -->
+			<div id="fm-info">
+				<div id="fm-info-mask"></div>
+				<span title="artist">Moumoon</span>
+				<div id="fm-info-ap">
+					<div id="fm-info-a">
+						<i>&lt</i>
+						<span title="albumtitle">《Sunshine Girl》</span>
+						<i>&gt</i>
+					</div>
+					<span title="publictime">2010</span>
+				</div>
+				<span title="title">Sunshine Girl</span>
+			</div>
+			<!-- progress bar -->
+			<div id="fm-progress">
+				<div id="fm-progress-default"></div>
+				<div id="fm-progress-seekbar"></div>
+				<div id="fm-progress-playbar"></div>
+			</div>
+			<!-- status -->
+			<div id="fm-status">
+				<div id="fm-status-volume">
+					<div id="fm-status-volume-postion">
+						<div id="fm-status-volume-default"></div>
+						<div id="fm-status-volume-value"></div>	
+						<div id="fm-status-volume-bar"></div>
+					</div>
+				</div>
+				<img src="static/img/player_fm_volume.png" alt="volume"/>
+				<span>-00:30</span>
+				<div id="fm-status-mask"></div>
+			</div>
+			<div id="fm-opera">
+				<img src="static/img/player_fm_next_normal.png" alt="next"/>
+				<img src="static/img/player_fm_like_normal.png" alt="like"/>
+			</div>
 		</div>
 	</div>
-	<div id="song-name">Sunshine Girl</div>
-	<a href="javascript:void(0)" id="play" class="trangle-border"></a>
 </div>
-
 <script type="text/javascript">
 	$(function() {
+
+	/**
+	 * player-UI
+	 */
+
+		// picture
+		$("#fm-picture").hover(function() {
+			$("#fm-picture a").stop().show().fadeTo(220, 0.7)
+	    }, function () {
+			$("#fm-picture a").stop().fadeTo(200, 0)
+		})
+		// button pause,play
+		$("#fm-pause").click(function() {
+			$("#fm-play").show();
+		})
+		$("#fm-play").click(function() {
+			$("#fm-play").hide();
+		})
+		// button volume
+		$("#fm-status-mask").hover(function() {
+			$("#fm-status span").stop().hide()
+			$("#fm-status img").stop().animate({marginRight:"60px"}, 50, "linear")
+			$("#fm-status-volume").stop().show()
+		}, function() {
+			var element = document.elementFromPoint(event.x,event.y)
+			if (element.id != "fm-status-volume-bar") {
+				$("#fm-status-volume").stop().hide()
+				$("#fm-status img").stop().animate({marginRight:"0px"}, "fast", "linear")
+				$("#fm-status span").stop().show()
+			}
+		})
+		// button next
+		$("#fm-opera img[alt=next]").hover(function() {
+			$(this).attr("src", "static/img/player_fm_next_hover.png")
+		}, function() {
+			$(this).attr("src", "static/img/player_fm_next_normal.png")
+		})
+		// button like
+		$("#fm-opera img[alt=like]").hover(function() {
+			$(this).attr("src", "static/img/player_fm_like_hover.png")
+		}, function() {
+			$(this).attr("src", "static/img/player_fm_like_normal.png")
+		})
+
+	/**
+	 * player-control
+	 */
+
 		$("#player").jPlayer({
 			ready: function () {
-				$("#player-con").css("display","block");
 				$(this).jPlayer("setMedia", {
-					mp3: "static/sunshine_girl.mp3"
-				});
+					mp3: "static/SunshineGirl.mp3"
+				})
+				$(this).jPlayer("play")
 			},
-			ended:function(){
-				$("#play").click();
-			},
-			swfPath:"static/js/jplayer/js",
-			errorAlerts: true,
-			cssSelectorAncestor: '#player-con',
+			solution:"flash",
+			swfPath:"static/js/jplayer",
+			errorAlerts: false,
+			cssSelectorAncestor: "",
 			cssSelector: {
-				seekBar: '.jp-seek-bar',
-				playBar: '.jp-play-bar',
-				currentTime: '.jp-current-time',
-				duration: '.jp-duration',
-				mute: '.jp-mute',
-				unmute: '.jp-unmute',
-				volumeBar: '.jp-volume-bar',
-				volumeBarValue: '.jp-volume-bar-value',
-				volumeMax: '.jp-volume-max'
-			}
-		});
-		var playClicked=false;
-		$("#play").click(function(){
-			playClicked=!playClicked;
-			if(playClicked){
-				$(this).removeClass("trangle-border").text("▌▌");
-				$("#player").jPlayer("play");
-			}else{
-				$(this).text("").addClass("trangle-border");
-				$("#player").jPlayer("pause");
-			}
-		});
-		$("#pause").click(function(){
-			$("#player").jPlayer("pause");
-		});
-		$("#stop").click(function(){
-			$("#player").jPlayer("stop");
-		});
+				playBar: "#fm-progress-playbar",
+				seekBar: "#fm-progress-seekbar",
+				volumeBar: "#fm-status-volume-bar",
+				volumeBarValue: "#fm-status-volume-value",
+				currentTime: "#fm-status span",
+			},
+		})
+		$("#fm-pause").click(function() {
+			$("#player").jPlayer("pause")
+		})
+		$("#fm-play").click(function() {
+			$("#player").jPlayer("play")
+		})
 	});
 </script>
 </body>
