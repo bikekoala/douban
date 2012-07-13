@@ -18,28 +18,28 @@
 	<!-- picture -->
 	<div id="fm-picture">
 		<img src="static/img/player_fm_sunshinegirl.jpg" alt="picture"/>
-		<a href="http://www.baidu.com" target="_blank"></a>
+		<a href="http://locusky.com" target="_blank"></a>
 	</div>
 	<!-- control -->
 	<div id="fm-control">
 		<!-- play -->
 		<div id="fm-play">
-			<div id="fm-play-fontmask"></div>
+			<div class="fm-play-fontmask"></div>
 			<span>继续收听 &gt</span>
 		</div>
 		<!-- pause -->
 		<div id="fm-pause">
-			<img src="static/img/player_fm_pause.png" alt="pause"/>
-			<div id="fm-pause-hover"></div>
+			<div class="fm-pause-img"></div>
+			<div class="fm-pause-hover"></div>
 		</div>
 		<!-- main -->
 		<div id="fm-main">
 			<!-- info -->
 			<div id="fm-info">
-				<div id="fm-info-mask"></div>
+				<div class="fm-info-mask"></div>
 				<span title="artist">Moumoon</span>
-				<div id="fm-info-ap">
-					<div id="fm-info-a">
+				<div class="fm-info-ap">
+					<div class="fm-info-a">
 						<i>&lt</i>
 						<span title="albumtitle">《Sunshine Girl》</span>
 						<i>&gt</i>
@@ -50,26 +50,30 @@
 			</div>
 			<!-- progress bar -->
 			<div id="fm-progress">
-				<div id="fm-progress-default"></div>
-				<div id="fm-progress-seekbar"></div>
-				<div id="fm-progress-playbar"></div>
+				<div class="fm-progress-default"></div>
+				<div class="fm-progress-seekbar"></div>
+				<div class="fm-progress-playbar"></div>
 			</div>
 			<!-- status -->
 			<div id="fm-status">
-				<div id="fm-status-volume">
-					<div id="fm-status-volume-postion">
-						<div id="fm-status-volume-default"></div>
-						<div id="fm-status-volume-value"></div>	
-						<div id="fm-status-volume-bar"></div>
+				<div class="fm-status-volume">
+					<div class="fm-status-volume-postion">
+						<div class="fm-status-volume-default"></div>
+						<div class="fm-status-volume-value"></div>	
+						<div class="fm-status-volume-bar"></div>
 					</div>
 				</div>
-				<img src="static/img/player_fm_volume.png" alt="volume"/>
-				<span>-00:30</span>
-				<div id="fm-status-mask"></div>
+				<div class="fm-status-volume-img"></div>
+				<span title="currentime">03:21</span>
+				<div class="fm-status-mask"></div>
 			</div>
 			<div id="fm-opera">
-				<img src="static/img/player_fm_next_normal.png" alt="next"/>
-				<img src="static/img/player_fm_like_normal.png" alt="like"/>
+				<div class="fm-opera-next"></div>
+				<div class="fm-opera-switch">
+					<div class="fm-opera-download"></div>
+					<div class="fm-opera-repeat-default"></div>
+					<div class="fm-opera-repeat-click"></div>
+				</div>
 			</div>
 		</div>
 	</div>
@@ -95,31 +99,26 @@
 			$("#fm-play").hide();
 		})
 		// button volume
-		$("#fm-status-mask").hover(function() {
+		$(".fm-status-mask").hover(function() {
 			$("#fm-status span").stop().hide()
-			$("#fm-status img").stop().animate({marginRight:"60px"}, 50, "linear")
-			$("#fm-status-volume").stop().show()
-		}, function() {
-			var element = document.elementFromPoint(event.x,event.y)
-			if (element.id != "fm-status-volume-bar") {
-				$("#fm-status-volume").stop().hide()
-				$("#fm-status img").stop().animate({marginRight:"0px"}, "fast", "linear")
+			$(".fm-status-volume-img").stop().animate({marginRight:"60px"}, 50, "linear")
+			$(".fm-status-volume").stop().show()
+		}, function(event) {
+			if ($(event.relatedTarget).attr("class") != "fm-status-volume-bar") {
+				$(".fm-status-volume").stop().hide()
+				$(".fm-status-volume-img").stop().animate({marginRight:"0px"}, "fast", "linear")
 				$("#fm-status span").stop().show()
 			}
 		})
-		// button next
-		$("#fm-opera img[alt=next]").hover(function() {
-			$(this).attr("src", "static/img/player_fm_next_hover.png")
-		}, function() {
-			$(this).attr("src", "static/img/player_fm_next_normal.png")
+		// button repeat
+		$(".fm-opera-repeat-default").click(function() {
+			$(this).hide()
+			$(".fm-opera-repeat-click").show()
 		})
-		// button like
-		$("#fm-opera img[alt=like]").hover(function() {
-			$(this).attr("src", "static/img/player_fm_like_hover.png")
-		}, function() {
-			$(this).attr("src", "static/img/player_fm_like_normal.png")
+		$(".fm-opera-repeat-click").click(function() {
+			$(this).hide()
+			$(".fm-opera-repeat-default").show()
 		})
-
 	/**
 	 * player-control
 	 */
@@ -133,14 +132,16 @@
 			},
 			solution:"flash",
 			swfPath:"static/js/jplayer",
-			errorAlerts: false,
-			cssSelectorAncestor: "",
+			errorAlerts: true,
+			cssSelectorAncestor: "#player-con",
 			cssSelector: {
-				playBar: "#fm-progress-playbar",
-				seekBar: "#fm-progress-seekbar",
-				volumeBar: "#fm-status-volume-bar",
-				volumeBarValue: "#fm-status-volume-value",
-				currentTime: "#fm-status span",
+				playBar: ".fm-progress-playbar",
+				seekBar: ".fm-progress-seekbar",
+				volumeBar: ".fm-status-volume-bar",
+				volumeBarValue: ".fm-status-volume-value",
+				currentTime: "#fm-status span[title=currentime]",
+				repeat : ".fm-opera-repeat-default",
+				repeatOff : ".fm-opera-repeat-click",
 			},
 		})
 		$("#fm-pause").click(function() {

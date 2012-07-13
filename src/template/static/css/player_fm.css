@@ -40,7 +40,7 @@
 	z-index: 10;
 	display: none;
 }
-#fm-play-fontmask {
+.fm-play-fontmask {
 	position: absolute;
 	top: 110px;
 	left: 100px;
@@ -58,20 +58,21 @@
 	width: 100%;
 	height: 28px;
 }
-#fm-pause img {
+.fm-pause-img {
 	float: right;
 	width: 28px;
 	height: 100%;
 	margin-right: 12px;
+	background: url(../img/player_fm_pause.png) no-repeat;
 }
-#fm-pause-hover {
+.fm-pause-hover {
 	position: absolute;
 	top: 0px;
 	right: 12px;
 	width: 28px;
 	height:28px;
 }
-#fm-pause-hover:hover {
+.fm-pause-hover:hover {
 	background-color: rgba(255,255,255,0.3);
 	cursor: pointer;
 }
@@ -85,7 +86,7 @@
 	height: 85px;
 	padding-left: 2px;
 }
-#fm-info-mask {
+.fm-info-mask {
 	position: absolute;
 	top: 0px;
 	left: 0px;
@@ -105,34 +106,34 @@
 	font-weight: 300;
 	letter-spacing: 2px
 }
-#fm-info-ap {
+.fm-info-ap {
 	line-height: 15px;
 	margin-top: 2px;
 }
-#fm-info-a {
+.fm-info-a {
 	margin-top: 2px;
 	padding-right: 5px;
 	color: #323232;
 	font-size: 12px;
 }
-#fm-info-a i {
+.fm-info-a i {
 	display:block;
 	float: left;
 	font-style: normal;
 }
-#fm-info-a i:nth-of-type(1) {
+.fm-info-a i:nth-of-type(1) {
 	padding-right: 5px;
 }
-#fm-info-a i:nth-of-type(2) {
+.fm-info-a i:nth-of-type(2) {
 	padding-left: 5px;
 	padding-right: 5px;
 }
-#fm-info-a span[title=albumtitle] {
+.fm-info-a span[title=albumtitle] {
 	display:block;
 	float: left;
 	max-width: 120px;
 }
-#fm-info-ap span[title=publictime] {
+.fm-info-ap span[title=publictime] {
 	display:block;
 	color: #575757;
 	font-size: 12px;
@@ -148,17 +149,17 @@
 	position: relative;
 	margin-top: 4px;
 }
-#fm-progress-default {
+.fm-progress-default {
 	border: 1px solid #e5e5e8;
 }
-#fm-progress-seekbar {
+.fm-progress-seekbar {
 	position: absolute;
 	top: 0px;
 	left: 0px;
 	border: 1px solid #e5e5e8;
 	cursor: pointer;
 }
-#fm-progress-playbar {
+.fm-progress-playbar {
 	position: absolute;
 	top: 0px;
 	left: 0px;
@@ -170,7 +171,7 @@
 	height: 17px;
 	margin-top: 2px;
 }
-#fm-status-mask {
+.fm-status-mask {
 	position: absolute;
 	top: 0px;
 	right: 0px;
@@ -178,7 +179,7 @@
 	height: 100%;
 	cursor: pointer;
 }
-#fm-status-volume {
+.fm-status-volume {
 	position: absolute;
 	top: 7px;
 	right: 5px;
@@ -186,21 +187,21 @@
 	z-index: 1;
 	display: none;
 }
-#fm-status-volume-position {
+.fm-status-volume-position {
 	width: 50px;
 	position: relative;
 }
-#fm-status-volume-default {
+.fm-status-volume-default {
 	width: 100%;
 	border: 2px solid #e5e5e8;
 }
-#fm-status-volume-value {
+.fm-status-volume-value {
 	position: absolute;
 	top: 0px;
 	left: 0px;
 	border: 2px solid #323232;
 }
-#fm-status-volume-bar {
+.fm-status-volume-bar {
 	position: absolute;
 	top: 0px;
 	left: 0px;
@@ -208,30 +209,65 @@
 	border: 2px solid rgba(255, 255, 255, 0);
 	cursor: pointer;
 }
-#fm-status span {
+#fm-status span[title=currentime] {
 	display: block;
 	float: right;
 	margin-right: 10px;
 	font-size: 12px;
 	color: #939892;
 }
-#fm-status img {
+.fm-status-volume-img {
 	float: right;
 	margin-top: 4px;
 	width: 10px;
 	height: 10px;
+	background: url(../img/player_fm_volume.png) no-repeat;
 }
 #fm-opera {
 	margin-top: 55px;
 	height: 25px;
 }
-#fm-opera img[alt=next] {
+.fm-opera-next {
 	float: right;
 	margin-top: 4px;
+	width: 31px;
+	height: 17px;
 	cursor: pointer;
+	background: url(../img/player_fm_next_normal.png) no-repeat;
 }
-#fm-opera img[alt=like] {
+.fm-opera-next:hover {
+	background: url(../img/player_fm_next_hover.png) no-repeat;
+}
+.fm-opera-download {
 	float: right;
-	margin-right: 30px;
+	margin: 1px 30px 0 0;
+	width: 21px;
+	height: 23px;
 	cursor: pointer;
+	background: url(../img/player_fm_download_normal.png) no-repeat;
+}
+.fm-opera-download:hover {
+	background: url(../img/player_fm_download_hover.png) no-repeat;
+}
+.fm-opera-repeat-default {
+	float: right;
+	margin-top: 3px;
+	margin-right: 30px;
+	width: 25px;
+	height: 20px;
+	cursor: pointer;
+	background: url(../img/player_fm_repeat_normal.png) no-repeat;
+}
+.fm-opera-repeat-default:hover {
+	background: url(../img/player_fm_repeat_hover.png) no-repeat;
+}
+.fm-opera-repeat-click {
+	display: none;
+	float: right;
+	margin-top: 3px;
+	margin-right: 30px;
+	width: 25px;
+	height: 20px;
+	cursor: pointer;
+	background: url(../img/player_fm_repeat_click.png) no-repeat;
 }
