@@ -227,6 +227,9 @@
 	margin-top: 55px;
 	height: 25px;
 }
+.fm-opera-switch {
+	display: none;
+}
 .fm-opera-next {
 	float: right;
 	margin-top: 4px;
