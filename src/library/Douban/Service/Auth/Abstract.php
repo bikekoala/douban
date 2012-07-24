@@ -15,7 +15,7 @@ class Douban_Service_Auth_Abstract extends Douban_Service_Abstract
 	 */
 	const ENCRYPT_KEY 	= 'sukaifm';
 
-	public function unserializeAuth($auth)
+	protected function unserializeAuth($auth)
 	{
 		$auth = Su_Func::encrypt($auth, self::ENCRYPT_KEY, 'DECODE');
 		$tmps = explode('|', $auth);
@@ -34,7 +34,7 @@ class Douban_Service_Auth_Abstract extends Douban_Service_Abstract
 		return $arr;
 	}
 
-	public function serializeAuth($auth)
+	protected function serializeAuth($auth)
 	{
 		$auth[] = Su_Func::ip();
 		$auth[] = time();

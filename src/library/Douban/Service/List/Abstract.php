@@ -1,7 +1,7 @@
 <?PHP
 class Douban_Service_List_Abstract extends Douban_Service_Abstract
 {
-	public function getOnlineList()
+	protected function getOnlineList()
 	{
 		// get online song list
 		$conf = Douban_Config::single();
@@ -16,13 +16,13 @@ class Douban_Service_List_Abstract extends Douban_Service_Abstract
 		return $data['r'] === 0 ? $data['songs'] : array();
 	}
 
-	public function getLocalList($start = null, $limit = null)
+	protected function getLocalList($start = null, $limit = null)
 	{
 		$uid = static::$auth['user_id'];
 		return Douban_Entity_Songs::single()->getList($uid, $start, $limit);
 	}
 
-	public function sync($localList, $onlineList)
+	protected function sync($localList, $onlineList)
 	{
 		$localSid = array();
 		foreach ($localList as $val) {
@@ -35,7 +35,7 @@ class Douban_Service_List_Abstract extends Douban_Service_Abstract
 
 		// add like songs
 		$addList = array_diff($onlineSid, $localSid);
-		$newList = $this->add($addList, $onlineList);
+		$newList = $this->add($onlineList, $addList);
 		// del unlike songs
 		$delList = array_diff($localSid, $onlineSid);
 		$this->del($delList);	
@@ -43,15 +43,23 @@ class Douban_Service_List_Abstract extends Douban_Service_Abstract
 		return $newList;
 	}
 
-	public function add($sid, $list)
+	protected function refresh($onlineList)
 	{
-		$arr = array();
-		foreach ($sid as $id) {
-			foreach ($list as $info) {
-				if( $id === $info['sid']) {
-					$arr[] = $info;
+		$this->del();
+		$this->add($onlineList);
+	}
+
+	protected function add($list, $sid = null)
+	{
+		if ($sid) {
+			$arr = array();
+			foreach ($sid as $id) {
+				foreach ($list as $info) {
+					$id === $info['sid'] && $arr[] = $info;
 				}
 			}
+		} else {
+			$arr = $list;	
 		}
 		if ( ! empty($arr)) {
 			$uid = static::$auth['user_id'];
@@ -60,10 +68,13 @@ class Douban_Service_List_Abstract extends Douban_Service_Abstract
 		return $arr;
 	}
 
-	public function del($sid)
+	protected function del($sid = null)
 	{
-		if ( ! empty($sid)) {
-			$uid = static::$auth['user_id'];
+		$uid = static::$auth['user_id'];
+		if (is_null($sid)) {
+			Douban_Entity_Songs::single()->del($uid);
+		}
+		if ($sid) {
 			Douban_Entity_Songs::single()->del($uid, $sid);
 		}
 	}

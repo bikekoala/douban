@@ -5,7 +5,7 @@ class Douban_Action_Main extends Douban_Action_Abstract
 	{
 		if ($this->auth['auth']) {
 			$this->setResponse($this->auth);
-			$this->tpl('player_fm');
+			$this->tpl('player');
 		} else {
 			$this->tpl('logon');
 		}

@@ -59,9 +59,7 @@ class Douban_Entity_Songs extends Douban_Entity_Abstract
 		$fields['title'] = 'title';
 		$fields['artist'] = 'artist';
 		$fields['albumtitle'] = 'albumtitle';
-		$fields['company'] = 'company';
-		$fields['album'] = 'album';
-		$fields['subtype'] = 'subtype';
+		$fields['public_time'] = 'public_time';
 		$fields['picture'] = 'picture';
 		$fields['url'] = 'url';
 		$fields['mtime'] = 'mtime';
@@ -90,7 +88,7 @@ class Douban_Entity_Songs extends Douban_Entity_Abstract
 		}
 	}
 	
-	public function del($uid, $sid = null)
+	public function del($uid, $sid = array())
 	{
 		$sql = "DELETE FROM {$this->table} WHERE `uid` = {$uid}";
 		if ($sid) {
