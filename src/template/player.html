@@ -8,155 +8,112 @@
 <meta name="viewport" content="user-scalable=no, width=device-width, initial-scale=1.0, maximum-scale=1.0">
 <title>Sunshine Girl</title>
 <link rel="shortcut icon" href="http://douban.fm/favicon.ico" type="image/x-icon">
-<link rel="stylesheet" href="static/css/player_fm.css">
-<script src="static/js/jquery-1.7.2.min.js"></script>
-<script src="static/js/jplayer/jquery.jplayer-2.1.0-min.js"></script>
+<link rel="stylesheet" href="static/css/player.css">
 </head>
 <body>
-<div id="player"></div>
-<div id="player-con">
-	<!-- picture -->
-	<div id="fm-picture">
-		<img src="static/img/player_fm_sunshinegirl.jpg" alt="picture"/>
-		<a href="http://locusky.com" target="_blank"></a>
-	</div>
-	<!-- control -->
-	<div id="fm-control">
-		<!-- play -->
-		<div id="fm-play">
-			<div class="fm-play-fontmask"></div>
-			<span>继续收听 &gt</span>
-		</div>
-		<!-- pause -->
-		<div id="fm-pause">
-			<div class="fm-pause-img"></div>
-			<div class="fm-pause-hover"></div>
-		</div>
-		<!-- main -->
-		<div id="fm-main">
-			<!-- info -->
-			<div id="fm-info">
-				<div class="fm-info-mask"></div>
-				<span title="artist">Moumoon</span>
-				<div class="fm-info-ap">
-					<div class="fm-info-a">
-						<i>&lt</i>
-						<span title="albumtitle">《Sunshine Girl》</span>
-						<i>&gt</i>
-					</div>
-					<span title="publictime">2010</span>
+<div id="section">
+	<div id="header"></div>
+	<div id="player-wrap">
+		<div id="player"></div>
+		<div id="player-con">
+			<!-- picture -->
+			<div id="fm-picture">
+				<img src="static/img/player_fm_sunshinegirl.jpg" alt="picture"/>
+				<a href="http://locusky.com" target="_blank"></a>
+			</div>
+			<!-- control -->
+			<div id="fm-control">
+				<!-- play -->
+				<div id="fm-play">
+					<div class="fm-play-fontmask"></div>
+					<span>继续收听 &gt</span>
 				</div>
-				<span title="title">Sunshine Girl</span>
-			</div>
-			<!-- progress bar -->
-			<div id="fm-progress">
-				<div class="fm-progress-default"></div>
-				<div class="fm-progress-seekbar"></div>
-				<div class="fm-progress-playbar"></div>
-			</div>
-			<!-- status -->
-			<div id="fm-status">
-				<div class="fm-status-volume">
-					<div class="fm-status-volume-postion">
-						<div class="fm-status-volume-default"></div>
-						<div class="fm-status-volume-value"></div>	
-						<div class="fm-status-volume-bar"></div>
-					</div>
+				<!-- pause -->
+				<div id="fm-pause">
+					<div class="fm-pause-img"></div>
+					<div class="fm-pause-hover"></div>
 				</div>
-				<div class="fm-status-volume-img"></div>
-				<span title="currentime">03:21</span>
-				<div class="fm-status-mask"></div>
-			</div>
-			<div id="fm-opera">
-				<div class="fm-opera-next"></div>
-				<div class="fm-opera-switch">
-					<div class="fm-opera-download"></div>
-					<div class="fm-opera-repeat-default"></div>
-					<div class="fm-opera-repeat-click"></div>
+				<!-- main -->
+				<div id="fm-main">
+				<!-- info -->
+					<div id="fm-info">
+						<div class="fm-info-mask"></div>
+						<span title="artist">Moumoon</span>
+						<div class="fm-info-ap">
+							<div class="fm-info-a">
+								<i>&lt</i>
+								<span title="albumtitle">《Sunshine Girl》</span>
+								<i>&gt</i>
+							</div>
+							<span title="publictime">2010</span>
+						</div>
+						<span title="title">Sunshine Girl</span>
+					</div>
+					<!-- progress bar -->
+					<div id="fm-progress">
+						<div class="fm-progress-default"></div>
+						<div class="fm-progress-seekbar"></div>
+						<div class="fm-progress-playbar"></div>
+					</div>
+					<!-- status -->
+					<div id="fm-status"> <div class="fm-status-volume"> <div class="fm-status-volume-postion">
+								<div class="fm-status-volume-default"></div>
+								<div class="fm-status-volume-value"></div>	
+								<div class="fm-status-volume-bar"></div>
+							</div>
+						</div>
+						<div class="fm-status-volume-img"></div>
+						<span title="currentime">03:21</span>
+						<div class="fm-status-mask"></div>
+					</div>
+					<div id="fm-opera">
+						<div class="fm-opera-next"></div>
+						<div class="fm-opera-switch">
+							<div class="fm-opera-download"></div>
+							<div class="fm-opera-repeat-default"></div>
+							<div class="fm-opera-repeat-click"></div>
+						</div>
+					</div>
 				</div>
 			</div>
 		</div>
 	</div>
 </div>
+<div id="bg"></div>
+<div id="list">
+	<div id="list-nav">boy</div>
+	<ul id="list-main"></ul>
+</div>
+<script src="static/js/jquery-1.7.2.min.js"></script>
+<script src="static/js/jplayer/jquery.jplayer-2.1.0-min.js"></script>
+<script src="static/js/jquery.ba-hashchange.min.js"></script>
+<script src="static/js/player.js"></script>
 <script type="text/javascript">
-	$(function() {
-
-	/**
-	 * player-UI
-	 */
-
-		// picture
-		$('#fm-picture').hover(function() {
-			$('#fm-picture a').stop().show().fadeTo(220, 0.7)
-	    }, function () {
-			$('#fm-picture a').stop().fadeTo(200, 0)
+$(function(){  
+	$.getJSON('?do=List.Liked&start=0&limit=10', function(list) {
+		$.each(list.data, function(i, item) {
+			$('<li><a class="list-title list-title-' +i+ '" href="#' +i+ '"><span>' +item.title+ '</span></a></li>').appendTo('#list-main')
+			$('.list-title-' + i).hover(function() {
+				$(this).css('opacity', 0.8)
+			}, function() {
+				$(this).css('opacity', 1)
+			})
 		})
-		// button pause,play
-		$('#fm-pause').click(function() {
-			$('#fm-play').show()
-		})
-		$('#fm-play').click(function() {
-			$('#fm-play').hide()
-		})
-		// button volume
-		$('.fm-status-mask').hover(function() {
-			$('#fm-status span').stop().hide()
-			$('.fm-status-volume-img').stop().animate({marginRight:'60px'}, 50, 'linear')
-			$('.fm-status-volume').stop().show()
-		}, function(event) {
-			if ($(event.relatedTarget).attr('class') != 'fm-status-volume-bar') {
-				$('.fm-status-volume').stop().hide()
-				$('.fm-status-volume-img').stop().animate({marginRight:'0px'}, 'fast', 'linear')
-				$('#fm-status span').stop().show()
+		var preId = null
+		$(window).hashchange(function() {
+			var hash = window.location.hash.replace(/^[^#]*#?(.*)$/, '$1')
+			var id = isNaN(hash) ? 0 : hash
+			// style
+			if (preId) {
+				$('.list-title-' + preId).css('background-color', '#d7deda')
 			}
-		})
-		// switch opera
-		$('#fm-opera').hover(function() {
-			$('.fm-opera-switch').show(100)
-		}, function() {
-			$('.fm-opera-switch').hide()
-		})
-		// button repeat
-		$('.fm-opera-repeat-default').click(function() {
-			$(this).hide()
-			$('.fm-opera-repeat-click').show()
-		})
-		$('.fm-opera-repeat-click').click(function() {
-			$(this).hide()
-			$('.fm-opera-repeat-default').show()
-		})
-	/**
-	 * player-control
-	 */
-
-		$('#player').jPlayer({
-			ready: function () {
-				$(this).jPlayer('setMedia', {
-					mp3: 'static/SunshineGirl.mp3'
-				})
-				$(this).jPlayer('play')
-			},
-			solution: 'flash',
-			swfPath: 'static/js/jplayer',
-			errorAlerts: true,
-			cssSelectorAncestor: '#player-con',
-			cssSelector: {
-				playBar: '.fm-progress-playbar',
-				seekBar: '.fm-progress-seekbar',
-				volumeBar: '.fm-status-volume-bar',
-				volumeBarValue: '.fm-status-volume-value',
-				currentTime: '#fm-status span[title=currentime]',
-				repeat : '.fm-opera-repeat-default',
-				repeatOff : '.fm-opera-repeat-click',
-			},
-		})
-		$('#fm-pause').click(function() {
-			$('#player').jPlayer('pause')
-		})
-		$('#fm-play').click(function() {
-			$('#player').jPlayer('play')
+			$('.list-title-' + id).css('background-color', '#93d0bf')
+			preId = id
+			// control-player
+			song = list.data[id].url
 		})
 	})
+})
 </script>
 </body>
 </html>

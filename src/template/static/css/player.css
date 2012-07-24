@@ -1,9 +1,88 @@
-#player-con {
+@charset "utf-8";
+/**
+ * CSS Document
+ */
+html, body {
+	width: 100%;
+	height: 100%;
+	overflow: hidden;
+}
+body {
+	margin: 0;
+	padding: 0;
+}
+#section {
+	position: relative;
+	width: 940px;
+	height: 100%;
+	min-height: 600px;
+	margin: 0 auto;
+}
+#player-wrap {
+	position: absolute;
+	right: 0;
+	top: 84px;
+	z-index: 100;
 	width: 510px;
 	height: 245px;
+	overflow: hidden;
+	background: white;
+	-moz-box-shadow: 0 0 20px rgba(0,0,0,.2);
+	-webkit-box-shadow: 0 0 20px rgba(0,0,0,.2);
+	box-shadow: 0 0 20px rgba(0,0,0,.2);
+}
+#bg {
+	position: absolute;
+	z-index: -2;
+	left: 0;
+	top: 144px;
+	width: 100%;
+	height: 278px;
+	margin-top: 0;
+	background: #E0E5E2;
+}
+#list {
+	position: absolute;
+	top: 0;
+	left: 250px;
+	width: 200px;
+	height: 100%;
+}
+#list-main {
+	display: block;
+	list-style: none;
+	padding: 0;
+	margin: 0;
+}
+#list-main li{
+	display: list-item;
+	list-style: none;
+	overflow: hidden;
+	margin-bottom: 25px;
+	background-color: #ffffff;
+}
+.list-title{
+	display: block;
+	height: 38px;
+	overflow: hidden;
+	white-space: nowrap;
+	text-decoration: none;
+	text-align: -webkit-match-parent;
+	background-color: #d7deda;
+}
+.list-title span{
+	display: block;
+	margin: 5px 0 0 20px;
+	font: 18px/1.6 "Microsoft Yahei", "微软雅黑", Tahoma, Arial, Helvetica, STHeiti;
+	letter-spacing: 1px;
+	color: #666666;
+}
+/**
+ * player-fm
+ */
+#player-con {
 	background-color: #ffffff;
 	font-family: "Microsoft Yahei", "微软雅黑", Tahoma, Arial, Helvetica, STHeiti;
-	border: 1px solid #8ecbb9;
 }
 #fm-picture {
 	position: relative;
@@ -17,8 +96,8 @@
 }
 #fm-picture a {
 	position: absolute;
-	top: 0px;
-	left: 0px;
+	top: 0;
+	left: 0;
 	width: 245px;
 	height: 245px;
 	background-color: rgba(150,150,150,0.5);
@@ -32,8 +111,8 @@
 }
 #fm-play {
 	position: absolute;
-	top: 0px;
-	right: 0px;
+	top: 0;
+	right: 0;
 	width: 265px;
 	height: 245px;
 	background-color: rgba(255, 255, 255, 0.8);
@@ -50,7 +129,7 @@
 #fm-play span {
 	display: block;
 	width: 65px;
-	margin: 110px 0px 0px 100px;
+	margin: 110px 0 0 100px;
 	font: 13px/1.6 arial,helvetica,sans-serif;
 }
 #fm-pause {
@@ -67,7 +146,7 @@
 }
 .fm-pause-hover {
 	position: absolute;
-	top: 0px;
+	top: 0;
 	right: 12px;
 	width: 28px;
 	height:28px;
@@ -88,8 +167,8 @@
 }
 .fm-info-mask {
 	position: absolute;
-	top: 0px;
-	left: 0px;
+	top: 0;
+	left: 0;
 	height: 85px;
 	width: 100%;
 }
@@ -154,15 +233,15 @@
 }
 .fm-progress-seekbar {
 	position: absolute;
-	top: 0px;
-	left: 0px;
+	top: 0;
+	left: 0;
 	border: 1px solid #e5e5e8;
 	cursor: pointer;
 }
 .fm-progress-playbar {
 	position: absolute;
-	top: 0px;
-	left: 0px;
+	top: 0;
+	left: 0;
 	border: 1px solid #8ecbb9;
 	cursor: pointer;
 }
@@ -173,8 +252,8 @@
 }
 .fm-status-mask {
 	position: absolute;
-	top: 0px;
-	right: 0px;
+	top: 0;
+	right: 0;
 	width: 55px;
 	height: 100%;
 	cursor: pointer;
@@ -197,14 +276,14 @@
 }
 .fm-status-volume-value {
 	position: absolute;
-	top: 0px;
-	left: 0px;
+	top: 0;
+	left: 0;
 	border: 2px solid #323232;
 }
 .fm-status-volume-bar {
 	position: absolute;
-	top: 0px;
-	left: 0px;
+	top: 0;
+	left: 0;
 	width: 100%;
 	border: 2px solid rgba(255, 255, 255, 0);
 	cursor: pointer;
