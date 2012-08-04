@@ -51,17 +51,19 @@ class Douban_Service_List_Abstract extends Douban_Service_Abstract
 
 	protected function add($list, $sid = null)
 	{
-		if ($sid) {
+		if (is_array($sid)) {
 			$arr = array();
-			foreach ($sid as $id) {
-				foreach ($list as $info) {
-					$id === $info['sid'] && $arr[] = $info;
+			if ($sid) {
+				foreach ($sid as $id) {
+					foreach ($list as $info) {
+						$id === $info['sid'] && $arr[] = $info;
+					}
 				}
 			}
-		} else {
+		} elseif (null === $sid) {
 			$arr = $list;	
 		}
-		if ( ! empty($arr)) {
+		if ($arr) {
 			$uid = static::$auth['user_id'];
 			Douban_Entity_Songs::single()->insert($uid, $arr);
 		}

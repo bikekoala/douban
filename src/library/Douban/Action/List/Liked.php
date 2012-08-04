@@ -2,7 +2,7 @@
 class Douban_Action_List_Liked extends Douban_Action_Abstract
 {
 	private $start = 0;
-	private $limit = 10;
+	private $limit = 20;
 
 	public function run()
 	{

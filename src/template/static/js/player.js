@@ -44,19 +44,20 @@ $(function() {
 		})
 	/**
 	 * player-control
-	 */
-		var song = 'http://mr3.douban.com/201207241720/14b5c0b45f6119f96f7b91fddc2dd1c4/view/song/small/p1797426.mp3';
+	 */	
 		$('#player').jPlayer({
 			ready: function () {
 				$(this).jPlayer('setMedia', {
-					mp3: 'static/SunshineGirl.mp3'
+					//mp3: 'static/SunshineGirl.mp3'
+					//mp3: 'http://mr5.douban.com/201207261421/ec9b4bb04be36d7c6566589121ed430f/view/song/small/p1563341.mp3'
+					mp3: 'http://mr4.douban.com/201207271227/4bd54b8e6adf49f9090255619fee3163/view/song/small/p1774704.mp3'
 					//mp3: song
 				})
-				//$(this).jPlayer('play')
+				$(this).jPlayer('play')
 			},
 			solution: 'flash',
 			swfPath: 'static/js/jplayer',
-			errorAlerts: true,
+			//errorAlerts: true,
 			cssSelectorAncestor: '#player-con',
 			cssSelector: {
 				playBar: '.fm-progress-playbar',
@@ -75,3 +76,6 @@ $(function() {
 			$('#player').jPlayer('play')
 		})
 	})
+function play(song) {
+		$('#player').jPlayer('setMedia', {mp3: song})
+}

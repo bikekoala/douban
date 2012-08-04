@@ -90,7 +90,35 @@
 <script src="static/js/player.js"></script>
 <script type="text/javascript">
 $(function(){  
-	$.getJSON('?do=List.Liked&start=0&limit=10', function(list) {
+	var start = 0
+	addList(start)
+	$(window).scroll(function() {
+		var winHeight = $(window).height()
+		var topHeight = $(document).scrollTop()
+		var docHeight = document.body.scrollHeight
+		if (winHeight+topHeight == docHeight) {
+			start += 20
+			addList(start)
+		}
+	})
+
+	var preId = null
+	$(window).hashchange(function() {
+		var hash = window.location.hash.replace(/^[^#]*#?(.*)$/, '$1')
+		var id = isNaN(hash) ? 0 : hash
+		// style
+		if (preId) {
+			$('.list-title-' + preId).css('background-color', '#d7deda')
+		}
+		$('.list-title-' + id).css('background-color', '#93d0bf')
+		preId = id
+		// control-player
+		song = list.data[id].url
+		play(song)
+	})
+})
+function addList(start) {
+	$.getJSON('?do=List.Liked&start='+start, function(list) {
 		$.each(list.data, function(i, item) {
 			$('<li><a class="list-title list-title-' +i+ '" href="#' +i+ '"><span>' +item.title+ '</span></a></li>').appendTo('#list-main')
 			$('.list-title-' + i).hover(function() {
@@ -99,21 +127,8 @@ $(function(){
 				$(this).css('opacity', 1)
 			})
 		})
-		var preId = null
-		$(window).hashchange(function() {
-			var hash = window.location.hash.replace(/^[^#]*#?(.*)$/, '$1')
-			var id = isNaN(hash) ? 0 : hash
-			// style
-			if (preId) {
-				$('.list-title-' + preId).css('background-color', '#d7deda')
-			}
-			$('.list-title-' + id).css('background-color', '#93d0bf')
-			preId = id
-			// control-player
-			song = list.data[id].url
-		})
 	})
-})
+}
 </script>
 </body>
 </html>

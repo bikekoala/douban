@@ -29,24 +29,13 @@ CREATE TABLE `songs` (
   `title` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
   `artist` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
   `albumtitle` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `company` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `album` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
-  `subtype` varchar(10) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `public_time` smallint(6) NOT NULL,
   `picture` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
   `url` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
   `mtime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   KEY `uid` (`uid`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `songs`
---
-
-LOCK TABLES `songs` WRITE;
-/*!40000 ALTER TABLE `songs` DISABLE KEYS */;
-/*!40000 ALTER TABLE `songs` ENABLE KEYS */;
-UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
@@ -57,4 +46,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2012-06-09  0:03:54
+-- Dump completed on 2012-07-20 17:59:44
