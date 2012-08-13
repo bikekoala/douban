@@ -50,12 +50,12 @@ $(function() {
 				$(this).jPlayer('setMedia', {
 					//mp3: 'static/SunshineGirl.mp3'
 					//mp3: 'http://mr5.douban.com/201207261421/ec9b4bb04be36d7c6566589121ed430f/view/song/small/p1563341.mp3'
-					mp3: 'http://mr4.douban.com/201207271227/4bd54b8e6adf49f9090255619fee3163/view/song/small/p1774704.mp3'
-					//mp3: song
+					//mp3: 'http://mr4.douban.com/201207271227/4bd54b8e6adf49f9090255619fee3163/view/song/small/p1774704.mp3'
+					mp3: song
 				})
 				$(this).jPlayer('play')
 			},
-			solution: 'flash',
+			solution: 'html,flash',
 			swfPath: 'static/js/jplayer',
 			//errorAlerts: true,
 			cssSelectorAncestor: '#player-con',

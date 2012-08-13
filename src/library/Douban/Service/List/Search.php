@@ -25,7 +25,7 @@ class Douban_Service_List_Search extends Douban_Service_List_Abstract
 		$songs = array();
 		foreach ($list as $val) {
 			$line = sprintf("%s@%s@%s", $val['title'] ,$val['artist'] ,$val['albumtitle']);
-			false !== strpos(strtolower($line), $query) && $songs[] =$val;
+			false !== strpos(strtolower($line), $query) && $songs[] = $val;
 		}
 		return $songs;
 	}

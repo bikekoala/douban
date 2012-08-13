@@ -90,42 +90,54 @@
 <script src="static/js/player.js"></script>
 <script type="text/javascript">
 $(function(){  
-	var start = 0
-	addList(start)
-	$(window).scroll(function() {
-		var winHeight = $(window).height()
-		var topHeight = $(document).scrollTop()
-		var docHeight = document.body.scrollHeight
-		if (winHeight+topHeight == docHeight) {
-			start += 20
-			addList(start)
-		}
-	})
-
-	var preId = null
-	$(window).hashchange(function() {
+	$.getJSON('?do=List.Liked&start=0', function(list) {
+		// add playlist
+		addList(list.data, 0)
+		$(window).scroll(function() {
+			var winHeight = $(window).height()
+			var topHeight = $(document).scrollTop()
+			var docHeightChorme = $(document).height()
+			var docHeightFirefox = document.body.scrollHeight
+			var docHeight = (docHeightChorme > winHeight) ? docHeightChorme : docHeightFirefox
+			if (winHeight+topHeight == docHeight) {
+				var start = $('#list-main li').length
+				$.getJSON('?do=List.Liked&start=' + start, function(list) {
+					addList(list.data, start)
+				})
+			}
+		})
+	
 		var hash = window.location.hash.replace(/^[^#]*#?(.*)$/, '$1')
-		var id = isNaN(hash) ? 0 : hash
-		// style
-		if (preId) {
-			$('.list-title-' + preId).css('background-color', '#d7deda')
-		}
-		$('.list-title-' + id).css('background-color', '#93d0bf')
-		preId = id
-		// control-player
-		song = list.data[id].url
-		play(song)
+		var preId = (hash=='' || isNaN(hash)) ? 0 : hash
+		playSong(preId, null)
+		$(window).hashchange(function() {
+			var hash = window.location.hash.replace(/^[^#]*#?(.*)$/, '$1')
+			var id = (hash=='' || isNaN(hash)) ? 0 : hash
+			playSong(id, preId)
+			preId = id
+		})
 	})
 })
-function addList(start) {
-	$.getJSON('?do=List.Liked&start='+start, function(list) {
-		$.each(list.data, function(i, item) {
-			$('<li><a class="list-title list-title-' +i+ '" href="#' +i+ '"><span>' +item.title+ '</span></a></li>').appendTo('#list-main')
-			$('.list-title-' + i).hover(function() {
-				$(this).css('opacity', 0.8)
-			}, function() {
-				$(this).css('opacity', 1)
-			})
+function playSong(id, preId) {
+	var count = $('#list-main li').length-1
+	id = id>count ? count : (id<=0 ? 0 : id)
+	window.location.href = '/#' + id
+	// style
+	if (preId) {
+		$('.list-title-' + preId).css('background-color', '#d7deda')
+	}
+	$('.list-title-' + id).css('background-color', '#93d0bf')
+	song = $('.list-title-' + id).attr('url')
+	play(song)
+}
+function addList(list, start) {
+	$.each(list, function(i, item) {
+		var n = start+i
+		$('<li><a class="list-title list-title-' +n+ '" href="#' +n+ '" url="' +item.url+ '"><span>' +item.title+ '</span></a></li>').appendTo('#list-main')
+		$('.list-title-' + n).hover(function() {
+			$(this).css('opacity', 0.8)
+		}, function() {
+			$(this).css('opacity', 1)
 		})
 	})
 }
